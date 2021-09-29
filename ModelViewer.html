@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<font face = "Verdana" size = "2">
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute  vec4 vPosition, vColor;
+varying vec4 fColor;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+void main(){
+    fColor = vColor;
+    gl_Position = vPosition * modelViewMatrix * projectionMatrix;
+	gl_PointSize = 10.0;
+
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 fColor;
+
+void
+main(){
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="./Common/webgl-utils.js"></script>
+<script type="text/javascript" src="./Common/initShaders.js"></script>
+<script type="text/javascript" src="./Common/MV.js"></script>
+<script type="text/javascript" src="ModelViewer.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="600" height="600">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+<p><b>Load</b> SMF file: <input type="file" name="file" id="file"  accept=".smf">
+<p>Once a file has been loaded the model will be displayed. 
+<p><b>'i'</b> -> Increase camera radius
+<p><b>'o'</b> -> Decrease camera radius
+<p><b>'j'</b> -> Increase height
+<p><b>'k'</b> -> Decrease height
+<p><b>'n'</b> -> Rotate left
+<p><b>'m'</b> -> Rotate right
+<p><b>'r'</b> -> Reset all values
+</body>
+</html>
